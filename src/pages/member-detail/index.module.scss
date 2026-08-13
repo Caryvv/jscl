@@ -1,0 +1,117 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  background: $color-bg-page;
+  padding: $spacing-lg;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar {
+  width: 160rpx;
+  height: 160rpx;
+  background: $color-bg-card;
+  border-radius: $radius-round;
+  @include flex-center;
+  margin-bottom: $spacing-md;
+  box-shadow: $shadow-card;
+  font-size: 80rpx;
+}
+
+.name {
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-xs;
+}
+
+.tags {
+  display: flex;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-lg;
+}
+
+.tag {
+  font-size: $font-size-sm;
+  padding: 4rpx $spacing-sm;
+  border-radius: $radius-xs;
+  color: $color-text-white;
+}
+
+.tagLife {
+  background: $color-info;
+}
+
+.tagAptitude {
+  background: $color-gold;
+}
+
+.card {
+  width: 100%;
+  max-width: $max-content-width;
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-lg;
+  box-shadow: $shadow-card;
+  margin-bottom: $spacing-md;
+}
+
+.cardTitle {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-md;
+  border-bottom: 1rpx solid $color-divider;
+  padding-bottom: $spacing-sm;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-sm 0;
+}
+
+.rowLabel {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}
+
+.rowValue {
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  font-weight: $font-weight-medium;
+}
+
+.rowIncome {
+  color: $color-success;
+}
+
+.rowCost {
+  color: $color-error;
+}
+
+.backBtn {
+  width: 100%;
+  max-width: $max-content-width;
+  height: $button-height-md;
+  background: $color-bg-card;
+  border: 2rpx solid $color-primary;
+  border-radius: $radius-button;
+  @include flex-center;
+  margin-top: $spacing-md;
+  transition: all $transition-base;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+}
+
+.backBtnText {
+  font-size: $font-size-md;
+  color: $color-primary;
+  font-weight: $font-weight-medium;
+}

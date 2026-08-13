@@ -1,0 +1,66 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  background: $color-bg-page;
+  padding: $spacing-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.card {
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-md $spacing-lg;
+  box-shadow: $shadow-card;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.iconWrap {
+  width: 80rpx; height: 80rpx;
+  background: $color-bg-card-dark;
+  border-radius: $radius-round;
+  @include flex-center;
+  flex-shrink: 0;
+}
+
+.iconEmoji { font-size: 40rpx; }
+
+.infoWrap { flex: 1; }
+
+.name { font-size: $font-size-md; font-weight: $font-weight-semibold; color: $color-text-primary; margin-bottom: 4rpx; }
+.desc { font-size: $font-size-xs; color: $color-text-tertiary; margin-bottom: 4rpx; }
+.levelInfo { font-size: $font-size-sm; color: $color-text-secondary; }
+.effect { font-size: $font-size-sm; color: $color-success; font-weight: $font-weight-medium; }
+
+.upgradeBtn {
+  flex-shrink: 0;
+  padding: $spacing-xs $spacing-md;
+  background: $color-primary;
+  border-radius: $radius-sm;
+  @include flex-center;
+  transition: all $transition-fast;
+  &:active { opacity: 0.9; }
+}
+
+.upgradeBtnDisabled { background: $color-text-disabled; }
+.upgradeBtnText { font-size: $font-size-sm; color: $color-text-white; font-weight: $font-weight-medium; }
+.costText { font-size: $font-size-xs; color: $color-text-tertiary; margin-top: 4rpx; text-align: center; }
+.maxLevel { font-size: $font-size-xs; color: $color-text-tertiary; text-align: center; margin-top: 4rpx; }
+
+.tipCard {
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-lg;
+  box-shadow: $shadow-card;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tipTitle { font-size: $font-size-md; font-weight: $font-weight-semibold; color: $color-text-primary; margin-bottom: $spacing-sm; }
+.tipText { font-size: $font-size-xs; color: $color-text-tertiary; text-align: center; line-height: $line-height-loose; }

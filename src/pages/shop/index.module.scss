@@ -1,0 +1,46 @@
+@use '@/styles/variables.scss' as *;
+
+.page { min-height: 100vh; background: $color-bg-page; padding: $spacing-lg 0; }
+
+.header { padding: 0 $spacing-lg; margin-bottom: $spacing-md; }
+.headerTitle { font-size: $font-size-xl; font-weight: $font-weight-semibold; color: $color-text-primary; }
+
+.tabBar { display: flex; gap: $spacing-sm; padding: 0 $spacing-lg; margin-bottom: $spacing-md; }
+
+.tab {
+  padding: $spacing-xs $spacing-md;
+  background: $color-bg-card;
+  border-radius: $radius-round;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  transition: all $transition-fast;
+  &.tabActive { background: $color-primary; color: $color-text-white; }
+}
+
+.list { display: flex; flex-direction: column; gap: $spacing-sm; padding: 0 $spacing-lg; }
+
+.item {
+  background: $color-bg-card; border-radius: $radius-md; padding: $spacing-md $spacing-lg;
+  box-shadow: $shadow-card; display: flex; flex-direction: row; align-items: center; gap: $spacing-md;
+}
+
+.itemIcon {
+  width: 80rpx; height: 80rpx; background: $color-bg-card-dark;
+  border-radius: $radius-md; @include flex-center; flex-shrink: 0; font-size: 36rpx;
+}
+
+.itemInfo { flex: 1; }
+.itemName { font-size: $font-size-md; font-weight: $font-weight-semibold; color: $color-text-primary; margin-bottom: 4rpx; }
+.itemDesc { font-size: $font-size-xs; color: $color-text-tertiary; @include text-ellipsis; margin-bottom: 4rpx; }
+.itemPrice { font-size: $font-size-sm; color: $color-gold; font-weight: $font-weight-medium; }
+.itemLimit { font-size: $font-size-xs; color: $color-text-disabled; }
+
+.buyBtn {
+  flex-shrink: 0; padding: $spacing-xs $spacing-md;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  border-radius: $radius-sm; transition: all $transition-fast;
+  &:active { opacity: 0.9; }
+}
+
+.buyBtnDisabled { background: $color-text-disabled; }
+.buyBtnText { font-size: $font-size-sm; color: $color-text-white; font-weight: $font-weight-medium; }

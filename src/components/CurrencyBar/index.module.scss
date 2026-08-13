@@ -1,0 +1,36 @@
+@use '@/styles/variables.scss' as *;
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-sm $spacing-lg;
+  background: linear-gradient(180deg, rgba($color-primary, 0.12) 0%, $color-bg-card 100%);
+  border-bottom: 1rpx solid $color-border;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 120rpx;
+}
+
+.label {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-bottom: 4rpx;
+}
+
+.value {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+}
+
+.income {
+  font-size: $font-size-xs;
+  color: $color-success;
+  margin-top: 2rpx;
+}

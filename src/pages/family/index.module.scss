@@ -1,0 +1,210 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: $color-bg-page;
+}
+
+.topBar {
+  padding-top: env(safe-area-inset-top, 88rpx);
+  background: $color-bg-card;
+  box-shadow: $shadow-float;
+}
+
+.gameTime {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: $spacing-xs 0;
+  gap: 8rpx;
+}
+
+.gameTimeText {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.gameTimeValue {
+  font-size: $font-size-sm;
+  color: $color-primary-dark;
+  font-weight: $font-weight-semibold;
+}
+
+.mainLayout {
+  display: flex;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.leftSidebar {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+  width: 120rpx;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.menuBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-sm 0;
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  box-shadow: $shadow-card;
+  transition: all $transition-fast;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.95);
+  }
+}
+
+.menuBtnEmoji {
+  font-size: 28rpx;
+  margin-bottom: 4rpx;
+}
+
+.menuBtnText {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+}
+
+.centerArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: $spacing-sm;
+  overflow-y: auto;
+}
+
+.familyTree {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  padding: $spacing-sm 0;
+}
+
+.generationRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: $spacing-sm;
+}
+
+.connectorLine {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.line {
+  width: 60rpx;
+  height: 2rpx;
+  background: $color-border;
+}
+
+.emptyState {
+  flex: 1;
+  @include flex-center;
+  flex-direction: column;
+}
+
+.emptyEmoji {
+  font-size: 64rpx;
+  margin-bottom: $spacing-md;
+}
+
+.emptyText {
+  font-size: $font-size-md;
+  color: $color-text-tertiary;
+}
+
+.rightSidebar {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+  width: 120rpx;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.bottomBanner {
+  padding: $spacing-sm $spacing-lg;
+  background: $color-bg-card;
+  border-top: 1rpx solid $color-divider;
+}
+
+.bannerText {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  text-align: center;
+}
+
+.offlineOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  @include flex-center;
+  z-index: 1000;
+}
+
+.offlineModal {
+  width: 560rpx;
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.offlineEmoji {
+  font-size: 64rpx;
+  margin-bottom: $spacing-md;
+}
+
+.offlineTitle {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-sm;
+}
+
+.offlineReward {
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-bold;
+  color: $color-gold;
+  margin-bottom: $spacing-lg;
+}
+
+.offlineBtn {
+  width: 100%;
+  height: $button-height-md;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  border-radius: $radius-button;
+  @include flex-center;
+  transition: all $transition-base;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+}
+
+.offlineBtnText {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-white;
+}

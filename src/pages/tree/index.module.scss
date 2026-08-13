@@ -1,0 +1,74 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #E8F5E9 0%, $color-bg-page 40%, $color-bg-card-dark 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $spacing-xl $spacing-lg;
+}
+
+.treeContainer { display: flex; flex-direction: column; align-items: center; margin-top: $spacing-xl; }
+
+.treeEmoji {
+  font-size: 160rpx;
+  margin-bottom: $spacing-md;
+  filter: drop-shadow(0 8rpx 16rpx rgba(0, 0, 0, 0.1));
+}
+
+.treeLevel { font-size: $font-size-lg; font-weight: $font-weight-semibold; color: $color-primary-dark; margin-bottom: $spacing-sm; }
+
+.progressBarWrap {
+  width: 500rpx; height: 16rpx;
+  background: $color-bg-hover;
+  border-radius: $radius-round;
+  overflow: hidden;
+  margin-bottom: $spacing-sm;
+}
+
+.progressBar {
+  height: 100%;
+  background: linear-gradient(90deg, $color-success 0%, #8BC34A 100%);
+  border-radius: $radius-round;
+  transition: width $transition-base;
+}
+
+.progressText { font-size: $font-size-sm; color: $color-text-tertiary; margin-bottom: $spacing-xl; }
+
+.waterBtn {
+  width: 400rpx; height: $button-height-md;
+  background: linear-gradient(135deg, #66BB6A 0%, #43A047 100%);
+  border-radius: $radius-button;
+  @include flex-center;
+  margin-bottom: $spacing-md;
+  box-shadow: 0 4rpx 16rpx rgba(76, 175, 80, 0.3);
+  transition: all $transition-base;
+  &:active { opacity: 0.9; transform: scale(0.98); }
+}
+
+.waterBtnText { font-size: $font-size-lg; font-weight: $font-weight-semibold; color: $color-text-white; }
+.waterBtnDisabled { opacity: 0.6; }
+
+.bonusCard {
+  width: 100%; max-width: $max-content-width;
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-lg;
+  margin-top: $spacing-xl;
+  box-shadow: $shadow-card;
+}
+
+.bonusTitle { font-size: $font-size-md; font-weight: $font-weight-semibold; color: $color-text-primary; margin-bottom: $spacing-md; }
+
+.bonusRow {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: $spacing-sm 0;
+  border-bottom: 1rpx solid $color-divider;
+  &:last-child { border-bottom: none; }
+}
+
+.bonusLabel { font-size: $font-size-sm; color: $color-text-secondary; }
+.bonusValue { font-size: $font-size-sm; font-weight: $font-weight-semibold; color: $color-success; }
+
+.emptyHint { font-size: $font-size-sm; color: $color-text-tertiary; text-align: center; margin-top: $spacing-xl; }

@@ -1,0 +1,43 @@
+import { Servant } from '@/types/servant';
+
+export const SERVANTS: Servant[] = [
+  {
+    id: 'servant_accountant',
+    type: 'accountant',
+    name: '账房家丁',
+    icon: '📊',
+    level: 0,
+    maxLevel: 10,
+    baseCost: 200,
+    costGrowth: 150,
+    effectDesc: '提升全家族银两月收益',
+    effectValue: 5,
+    effectGrowth: 5,
+  },
+  {
+    id: 'servant_guard',
+    type: 'guard',
+    name: '护院家丁',
+    icon: '🛡️',
+    level: 0,
+    maxLevel: 10,
+    baseCost: 300,
+    costGrowth: 200,
+    effectDesc: '抵御负面事件，保障家族平安',
+    effectValue: 5,
+    effectGrowth: 5,
+  },
+  {
+    id: 'servant_steward',
+    type: 'steward',
+    name: '管家家丁',
+    icon: '🧹',
+    level: 0,
+    maxLevel: 10,
+    baseCost: 250,
+    costGrowth: 180,
+    effectDesc: '提升离线收益累计上限',
+    effectValue: 1,
+    effectGrowth: 1,
+  },
+];

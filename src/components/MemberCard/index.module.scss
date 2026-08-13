@@ -1,0 +1,88 @@
+@use '@/styles/variables.scss' as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $spacing-md;
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  border: 2rpx solid $color-border;
+  box-shadow: $shadow-card;
+  transition: all $transition-fast;
+  min-width: 160rpx;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.97);
+  }
+
+  &.normal { border-color: $color-border; }
+  &.good { border-color: $color-success; }
+  &.excellent { border-color: $color-gold; }
+  &.genius {
+    border-color: $color-treasure;
+    background: linear-gradient(135deg, #FFF8F0 0%, $color-bg-card 100%);
+  }
+  &.deceased {
+    opacity: 0.5;
+    background: $color-bg-hover;
+  }
+  &.compact {
+    padding: $spacing-sm;
+    min-width: 120rpx;
+  }
+}
+
+.avatar {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: $radius-round;
+  background: $color-bg-card-dark;
+  @include flex-center;
+  margin-bottom: 8rpx;
+}
+
+.avatarEmoji { font-size: 36rpx; }
+
+.name {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  @include text-ellipsis;
+  max-width: 140rpx;
+  margin-bottom: 4rpx;
+}
+
+.nameDeceased { color: $color-text-tertiary; text-decoration: line-through; }
+
+.tagRow {
+  display: flex;
+  gap: 4rpx;
+  margin-bottom: 4rpx;
+}
+
+.tag {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  background: $color-bg-hover;
+  padding: 2rpx 8rpx;
+  border-radius: $radius-xs;
+}
+
+.aptitudeTag {
+  color: $color-primary-dark;
+  background: rgba($color-primary, 0.15);
+}
+
+.profession {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  margin-bottom: 4rpx;
+}
+
+.finance { display: flex; flex-direction: column; align-items: center; gap: 2rpx; }
+
+.income { font-size: $font-size-xs; color: $color-success; font-weight: $font-weight-medium; }
+
+.cost { font-size: $font-size-xs; color: $color-error; font-weight: $font-weight-medium; }
