@@ -6,6 +6,13 @@ export default defineAppConfig({
     'pages/shop/index',
     'pages/add-child/index',
     'pages/member-detail/index',
+    'pages/trading/index',
+    'pages/achievement/index',
+    'pages/collection/index',
+    'pages/dynasty/index',
+    'pages/genealogy/index',
+    'pages/welfare/index',
+    'pages/recharge/index',
   ],
   window: {
     backgroundTextStyle: 'light',

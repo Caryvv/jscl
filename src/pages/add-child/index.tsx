@@ -1,101 +1,107 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { View, Text, Input } from '@tarojs/components';
+import { View, Text, ScrollView } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import classnames from 'classnames';
 import { useFamilyStore } from '@/stores/familyStore';
 import { useResourceStore } from '@/stores/resourceStore';
-import { ADD_CHILD_COST } from '@/constants/member';
+import { getStorage, setStorage } from '@/utils/storage';
+import { BIRTH_MILESTONES } from '@/constants/member';
 import styles from './index.module.scss';
 
-const AddChildPage: React.FC = () => {
-  const { addChildCooldown, addChild, getAliveAdultCouple, init: initFamily } = useFamilyStore();
-  const { silver, init: initResource } = useResourceStore();
-  const [name, setName] = useState('');
-  const [gender, setGender] = useState<'male' | 'female'>('male');
-  const [cooldownStr, setCooldownStr] = useState('');
+const CLAIMED_KEY = 'birthMilestoneClaimed';
 
-  useEffect(() => { initFamily(); initResource(); }, []);
+const rewardText = (rewards: { type: string; amount: number }[]) =>
+  rewards
+    .map(r => `${r.type === 'silver' ? '银两' : r.type === 'luckyCharm' ? '福缘符' : '金元宝'}+${r.amount}`)
+    .join(' ');
+
+const AddChildPage: React.FC = () => {
+  const { totalBirths, init: initFamily } = useFamilyStore();
+  const { addSilver, addLuckyCharm, addGoldBar, init: initResource } = useResourceStore();
+  const [claimedIds, setClaimedIds] = useState<string[]>([]);
 
   useEffect(() => {
-    if (addChildCooldown > 0) {
-      const m = Math.floor(addChildCooldown / 60);
-      const s = addChildCooldown % 60;
-      setCooldownStr(`${m}分${s}秒`);
-    } else { setCooldownStr(''); }
-  }, [addChildCooldown]);
+    initFamily();
+    initResource();
+    setClaimedIds(getStorage<string[]>(CLAIMED_KEY, []) || []);
+  }, []);
 
-  const couple = getAliveAdultCouple();
-  const canSubmit = name.trim().length > 0 && addChildCooldown <= 0 && silver >= ADD_CHILD_COST && !!couple;
-
-  const handleSubmit = useCallback(() => {
-    if (!canSubmit) return;
-    const result = addChild(name.trim(), gender);
-    if (result.success) {
-      Taro.showToast({ title: `喜得${gender === 'male' ? '贵子' : '千金'}：${result.child?.name}！`, icon: 'success', duration: 2000 });
-      setTimeout(() => Taro.navigateBack(), 1500);
-    } else {
-      Taro.showToast({ title: result.message, icon: 'none' });
+  const handleClaim = useCallback((id: string) => {
+    const milestone = BIRTH_MILESTONES.find(m => m.id === id);
+    if (!milestone) return;
+    if (totalBirths < milestone.births) {
+      Taro.showToast({ title: '尚未达成', icon: 'none' });
+      return;
     }
-  }, [name, gender, canSubmit, addChild]);
+    if (claimedIds.includes(id)) {
+      Taro.showToast({ title: '已领取', icon: 'none' });
+      return;
+    }
+    for (const r of milestone.rewards) {
+      if (r.type === 'silver') addSilver(r.amount);
+      else if (r.type === 'luckyCharm') addLuckyCharm(r.amount);
+      else if (r.type === 'goldBar') addGoldBar(r.amount);
+    }
+    const next = [...claimedIds, id];
+    setClaimedIds(next);
+    setStorage(CLAIMED_KEY, next);
+    Taro.showToast({ title: `领取成功：${rewardText(milestone.rewards)}`, icon: 'success' });
+  }, [totalBirths, claimedIds, addSilver, addLuckyCharm, addGoldBar]);
+
+  const handleBack = useCallback(() => {
+    const pages = Taro.getCurrentPages();
+    if (pages.length > 1) Taro.navigateBack();
+    else Taro.switchTab({ url: '/pages/family/index' });
+  }, []);
 
   return (
     <View className={styles.page}>
       <Text className={styles.heroEmoji}>{'\uD83D\uDC76'}</Text>
-      <Text className={styles.title}>添丁有喜</Text>
-      <Text className={styles.desc}>为家族增添新成员，延续百年香火</Text>
+      <Text className={styles.title}>添丁福报</Text>
+      <Text className={styles.desc}>家族开枝散叶，累计添丁可领取福报奖励</Text>
 
-      <View className={styles.formCard}>
-        {couple ? (
-          <View className={styles.parentsRow}>
-            <Text className={styles.parent}>{'\uD83D\uDC68'} {couple.father.name}</Text>
-            <Text className={styles.heartEmoji}>{'\u2764\uFE0F'}</Text>
-            <Text className={styles.parent}>{'\uD83D\uDC69'} {couple.mother.name}</Text>
-          </View>
-        ) : (
-          <View className={styles.field}>
-            <Text className={styles.label} style={{ color: '#C4563A' }}>家族中暂无符合条件的成年夫妇</Text>
-          </View>
-        )}
-        <View className={styles.divider} />
+      <View className={styles.countCard}>
+        <Text className={styles.countLabel}>累计添丁</Text>
+        <Text className={styles.countValue}>{totalBirths}</Text>
+        <Text className={styles.countUnit}>人</Text>
+      </View>
 
-        <View className={styles.field}>
-          <Text className={styles.label}>为孩儿取名</Text>
-          <Input className={styles.input} type="text" placeholder="请输入姓名（2-4字）" maxlength={4} value={name} onInput={e => setName(e.detail.value)} />
-        </View>
-
-        <View className={styles.field}>
-          <Text className={styles.label}>期待孩儿性别</Text>
-          <View className={styles.genderSelector}>
-            <View className={classnames(styles.genderBtn, gender === 'male' && styles.genderActive)} onClick={() => setGender('male')}>
-              <Text className={styles.genderBtnEmoji}>{'\uD83D\uDC66'}</Text><Text>男</Text>
+      <ScrollView scrollY className={styles.list}>
+        {BIRTH_MILESTONES.map(m => {
+          const reached = totalBirths >= m.births;
+          const claimed = claimedIds.includes(m.id);
+          const percent = Math.min(100, Math.floor((totalBirths / m.births) * 100));
+          return (
+            <View key={m.id} className={classnames(styles.card, reached && styles.cardReached)}>
+              <View className={styles.cardInfo}>
+                <Text className={styles.cardName}>{m.title}</Text>
+                <Text className={styles.cardCond}>累计添丁 {m.births} 人</Text>
+                {!reached && (
+                  <View className={styles.progressBar}>
+                    <View className={styles.progressFill} style={{ width: `${percent}%` }} />
+                    <Text className={styles.progressText}>{Math.min(totalBirths, m.births)}/{m.births}</Text>
+                  </View>
+                )}
+                <Text className={styles.cardReward}>奖励：{rewardText(m.rewards)}</Text>
+              </View>
+              <View className={styles.cardAction}>
+                {!reached ? (
+                  <Text className={styles.statusLocked}>未达成</Text>
+                ) : claimed ? (
+                  <Text className={styles.statusClaimed}>已领取</Text>
+                ) : (
+                  <View className={styles.claimBtn} onClick={() => handleClaim(m.id)}>
+                    <Text className={styles.claimBtnText}>领取</Text>
+                  </View>
+                )}
+              </View>
             </View>
-            <View className={classnames(styles.genderBtn, gender === 'female' && styles.genderActive)} onClick={() => setGender('female')}>
-              <Text className={styles.genderBtnEmoji}>{'\uD83D\uDC67'}</Text><Text>女</Text>
-            </View>
-          </View>
-        </View>
+          );
+        })}
+      </ScrollView>
 
-        <View className={styles.divider} />
-        <View className={styles.infoRow}>
-          <Text className={styles.infoLabel}>添丁消耗</Text>
-          <Text className={styles.infoValue}>{ADD_CHILD_COST} 银两</Text>
-        </View>
-        <View className={styles.infoRow}>
-          <Text className={styles.infoLabel}>当前银两</Text>
-          <Text className={styles.infoValue} style={{ color: silver >= ADD_CHILD_COST ? '#6B8E5A' : '#C4563A' }}>{silver}</Text>
-        </View>
-        {addChildCooldown > 0 && (
-          <View className={styles.infoRow}>
-            <Text className={styles.infoLabel}>冷却时间</Text>
-            <Text className={styles.infoValue} style={{ color: '#C4563A' }}>{cooldownStr}</Text>
-          </View>
-        )}
-
-        <View className={classnames(styles.submitBtn, !canSubmit && styles.submitBtnDisabled)} onClick={handleSubmit}>
-          <Text className={styles.submitBtnText}>
-            {!couple ? '无符合条件的夫妇' : addChildCooldown > 0 ? `冷却中 ${cooldownStr}` : silver < ADD_CHILD_COST ? '银两不足' : '\uD83C\uDF89 添丁'}
-          </Text>
-        </View>
+      <View className={styles.backBtn} onClick={handleBack}>
+        <Text className={styles.backBtnText}>返回</Text>
       </View>
     </View>
   );

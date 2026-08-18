@@ -27,6 +27,48 @@
   margin-bottom: $spacing-xs;
 }
 
+.nameRow {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.renameEntry {
+  font-size: $font-size-xs;
+  color: $color-primary;
+  padding: 2rpx $spacing-sm;
+  border: 2rpx solid $color-primary;
+  border-radius: $radius-xs;
+}
+
+.renameRow {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-sm;
+}
+
+.renamePrefix { font-size: $font-size-md; color: $color-text-secondary; }
+
+.renameInput {
+  width: 160rpx;
+  height: 64rpx;
+  background: $color-bg-hover;
+  border-radius: $radius-sm;
+  padding: 0 $spacing-sm;
+  font-size: $font-size-md;
+  text-align: center;
+  color: $color-text-primary;
+}
+
+.renameConfirm {
+  font-size: $font-size-sm;
+  color: $color-text-white;
+  background: $color-primary;
+  padding: $spacing-xs $spacing-md;
+  border-radius: $radius-button;
+}
+
 .tags {
   display: flex;
   gap: $spacing-sm;
@@ -46,6 +88,141 @@
 
 .tagAptitude {
   background: $color-gold;
+}
+
+.tagProfession {
+  background: $color-primary;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-md;
+  border-bottom: 1rpx solid $color-divider;
+  padding-bottom: $spacing-sm;
+}
+
+.changeBtn {
+  font-size: $font-size-sm;
+  color: $color-primary;
+  font-weight: $font-weight-medium;
+  padding: $spacing-xs $spacing-sm;
+  border: 2rpx solid $color-primary;
+  border-radius: $radius-xs;
+  transition: all $transition-fast;
+  &:active { opacity: 0.8; }
+}
+
+.upgradeBtn {
+  margin-top: $spacing-md;
+  height: $button-height-sm;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  border-radius: $radius-button;
+  @include flex-center;
+  transition: all $transition-fast;
+  &:active { opacity: 0.9; transform: scale(0.98); }
+}
+
+.upgradeBtnDisabled {
+  background: $color-text-disabled;
+}
+
+.upgradeBtnText {
+  font-size: $font-size-sm;
+  color: $color-text-white;
+  font-weight: $font-weight-medium;
+}
+
+.professionPanel {
+  width: 100%;
+  max-width: $max-content-width;
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-lg;
+  box-shadow: $shadow-card;
+  margin-bottom: $spacing-md;
+}
+
+.panelTitle {
+  display: block;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-md;
+}
+
+.profCard {
+  display: flex;
+  flex-direction: row;
+  gap: $spacing-md;
+  padding: $spacing-md;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-sm;
+  margin-bottom: $spacing-sm;
+  transition: all $transition-fast;
+  &:active { border-color: $color-primary; background: $color-primary-bg; }
+}
+
+.profCardCurrent {
+  border-color: $color-primary;
+  background: $color-primary-bg;
+  opacity: 0.7;
+}
+
+.profIcon {
+  width: 72rpx;
+  height: 72rpx;
+  background: $color-bg-card-dark;
+  border-radius: $radius-md;
+  @include flex-center;
+  flex-shrink: 0;
+  font-size: 36rpx;
+}
+
+.profInfo {
+  flex: 1;
+}
+
+.profNameRow {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-bottom: 4rpx;
+}
+
+.profName {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.profCurrent {
+  font-size: $font-size-xs;
+  color: $color-primary;
+  border: 1rpx solid $color-primary;
+  border-radius: $radius-xs;
+  padding: 0 8rpx;
+}
+
+.profDesc {
+  display: block;
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  margin-bottom: 2rpx;
+}
+
+.profEffect {
+  display: block;
+  font-size: $font-size-xs;
+  color: $color-success;
+  margin-bottom: 2rpx;
+}
+
+.profCost {
+  display: block;
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
 }
 
 .card {

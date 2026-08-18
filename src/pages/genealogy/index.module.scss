@@ -1,0 +1,122 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  background: $color-bg-page;
+  display: flex;
+  flex-direction: column;
+  padding: $spacing-lg;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: $spacing-md;
+}
+
+.headerTitle {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.headerSub {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-top: 4rpx;
+}
+
+.empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.emptyEmoji {
+  font-size: 100rpx;
+  margin-bottom: $spacing-md;
+}
+
+.emptyText {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+  margin-bottom: $spacing-xs;
+}
+
+.emptyHint {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  text-align: center;
+  padding: 0 $spacing-xl;
+}
+
+.list {
+  flex: 1;
+}
+
+.card {
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  margin-bottom: $spacing-sm;
+  box-shadow: $shadow-card;
+  border-left: 6rpx solid $color-gold;
+}
+
+.cardHead {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: $spacing-sm;
+}
+
+.cardIcon {
+  font-size: 48rpx;
+  margin-right: $spacing-sm;
+}
+
+.cardTitleWrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardName {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.cardDynasty {
+  font-size: $font-size-xs;
+  color: $color-gold;
+}
+
+.cardAge {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.epitaph {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: $line-height-loose;
+}
+
+.backBtn {
+  margin-top: $spacing-md;
+  height: $button-height-md;
+  background: $color-bg-card;
+  border-radius: $radius-button;
+  @include flex-center;
+  box-shadow: $shadow-card;
+  &:active { opacity: 0.9; }
+}
+
+.backBtnText {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+}

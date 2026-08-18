@@ -4,6 +4,7 @@ import Taro from '@tarojs/taro';
 import classnames from 'classnames';
 import { useShopStore } from '@/stores/shopStore';
 import { useResourceStore } from '@/stores/resourceStore';
+import { useFamilyStore } from '@/stores/familyStore';
 import { ShopItem } from '@/types/shop';
 import styles from './index.module.scss';
 
@@ -35,10 +36,11 @@ const ShopPage: React.FC = () => {
     if (item.priceType === 'silver' && silver < item.price) { Taro.showToast({ title: '银两不足', icon: 'none' }); return; }
     if (item.priceType === 'luckyCharm' && luckyCharm < item.price) { Taro.showToast({ title: '福缘符不足', icon: 'none' }); return; }
 
-    if (item.priceType === 'silver') consumeSilver(item.price);
-    else consumeLuckyCharm(item.price);
-
+    // 福缘锦囊为纯奖励道具，直接发放
     if (item.effectType === 'random_reward') {
+      if (item.priceType === 'silver') consumeSilver(item.price);
+      else consumeLuckyCharm(item.price);
+
       if (Math.random() < 0.5) {
         const r = 200 + Math.floor(Math.random() * 800);
         addSilver(r);
@@ -48,16 +50,37 @@ const ShopPage: React.FC = () => {
         addLuckyCharm(c);
         Taro.showToast({ title: `获得 ${c} 福缘符！`, icon: 'success' });
       }
-    } else {
-      Taro.showToast({ title: `购买成功：${item.name}`, icon: 'success' });
+      recordPurchase(item.id, item.limitType);
+      return;
     }
+
+    // 其余道具：先应用效果，成功后再扣费并记录购买
+    const result = useFamilyStore.getState().applyItemEffect(item.effectType, item.effectValue);
+    if (!result.success) {
+      Taro.showToast({ title: result.message, icon: 'none' });
+      return;
+    }
+
+    if (item.priceType === 'silver') consumeSilver(item.price);
+    else consumeLuckyCharm(item.price);
+
     recordPurchase(item.id, item.limitType);
+    Taro.showToast({ title: result.message, icon: 'success' });
   }, [silver, luckyCharm, getPurchaseCount, recordPurchase, consumeSilver, consumeLuckyCharm, addSilver, addLuckyCharm]);
 
   const isDisabled = (item: ShopItem) => {
     if (item.limitType === 'unlimited') return false;
     return getPurchaseCount(item.id, item.limitType) >= item.limitCount;
   };
+
+  const handleBack = useCallback(() => {
+    const pages = Taro.getCurrentPages();
+    if (pages.length > 1) {
+      Taro.navigateBack();
+    } else {
+      Taro.switchTab({ url: '/pages/family/index' });
+    }
+  }, []);
 
   return (
     <View className={styles.page}>
@@ -86,6 +109,9 @@ const ShopPage: React.FC = () => {
             </View>
           );
         })}
+      </View>
+      <View className={styles.backBtn} onClick={handleBack}>
+        <Text className={styles.backBtnText}>返回</Text>
       </View>
     </View>
   );

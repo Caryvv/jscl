@@ -19,6 +19,17 @@
 
 .list { display: flex; flex-direction: column; gap: $spacing-sm; padding: 0 $spacing-lg; }
 
+.backBtn {
+  margin: $spacing-md $spacing-lg 0;
+  height: $button-height-md;
+  background: $color-bg-card;
+  border-radius: $radius-button;
+  @include flex-center;
+  box-shadow: $shadow-card;
+  &:active { opacity: 0.9; }
+}
+.backBtnText { font-size: $font-size-md; color: $color-text-secondary; }
+
 .item {
   background: $color-bg-card; border-radius: $radius-md; padding: $spacing-md $spacing-lg;
   box-shadow: $shadow-card; display: flex; flex-direction: row; align-items: center; gap: $spacing-md;

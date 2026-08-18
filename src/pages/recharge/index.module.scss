@@ -1,0 +1,137 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  background: $color-bg-page;
+  display: flex;
+  flex-direction: column;
+  padding: $spacing-lg;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-md;
+}
+
+.headerTitle {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.headerRight {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.goldText {
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  background: $color-bg-card;
+  border-radius: $radius-round;
+  padding: $spacing-xs $spacing-md;
+  box-shadow: $shadow-card;
+}
+
+.adFreeTag {
+  font-size: $font-size-xs;
+  color: $color-text-white;
+  background: $color-success;
+  border-radius: $radius-round;
+  padding: 2rpx $spacing-sm;
+}
+
+.list {
+  flex: 1;
+}
+
+.group {
+  margin-bottom: $spacing-md;
+}
+
+.groupTitle {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-secondary;
+  margin-bottom: $spacing-sm;
+}
+
+.grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+}
+
+.card {
+  width: calc((100% - #{$spacing-sm}) / 2);
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  box-shadow: $shadow-card;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cardName {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: 4rpx;
+}
+
+.cardDesc {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  text-align: center;
+  margin-bottom: $spacing-sm;
+  min-height: 56rpx;
+}
+
+.buyBtn {
+  width: 100%;
+  height: $button-height-sm;
+  background: linear-gradient(135deg, $color-gold 0%, $color-treasure 100%);
+  border-radius: $radius-button;
+  @include flex-center;
+  &:active { opacity: 0.9; }
+}
+
+.buyBtnDisabled {
+  opacity: 0.5;
+}
+
+.buyBtnText {
+  font-size: $font-size-sm;
+  color: $color-text-white;
+  font-weight: $font-weight-medium;
+}
+
+.notice {
+  display: block;
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  line-height: $line-height-loose;
+  padding: $spacing-md 0;
+}
+
+.backBtn {
+  margin-top: $spacing-xs;
+  height: $button-height-md;
+  background: $color-bg-card;
+  border-radius: $radius-button;
+  @include flex-center;
+  box-shadow: $shadow-card;
+  &:active { opacity: 0.9; }
+}
+
+.backBtnText {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+}

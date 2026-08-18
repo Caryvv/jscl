@@ -1,9 +1,11 @@
 import { FamilyMember } from '@/types/member';
 import { SettlementResult } from '@/types/resource';
 import { updateMemberLifeStage, getDeathAge } from './memberService';
+import { getDoctorCostReduction } from './professionService';
 
 export function settleMonth(members: FamilyMember[], servantBonus: number): SettlementResult {
   const aliveMembers = members.filter(m => m.isAlive);
+  const costReduction = getDoctorCostReduction(aliveMembers);
   let totalIncome = 0;
   let totalCost = 0;
 
@@ -12,7 +14,7 @@ export function settleMonth(members: FamilyMember[], servantBonus: number): Sett
     const updatedMember = updateMemberLifeStage(member);
 
     totalIncome += updatedMember.monthlyIncome;
-    totalCost += updatedMember.monthlyCost;
+    totalCost += Math.floor(updatedMember.monthlyCost * (1 - costReduction));
 
     if (updatedMember.lifeStage === 'elder' && updatedMember.age >= getDeathAge(updatedMember)) {
       updatedMember.isAlive = false;
@@ -32,12 +34,13 @@ export function settleMonth(members: FamilyMember[], servantBonus: number): Sett
 
 export function calcFamilyMonthlyIncome(members: FamilyMember[], servantBonus: number): number {
   const aliveMembers = members.filter(m => m.isAlive);
+  const costReduction = getDoctorCostReduction(aliveMembers);
   let total = 0;
   for (const member of aliveMembers) {
     if (member.lifeStage === 'adult' || member.lifeStage === 'elder') {
-      total += member.monthlyIncome - member.monthlyCost;
+      total += member.monthlyIncome - Math.floor(member.monthlyCost * (1 - costReduction));
     } else {
-      total -= member.monthlyCost;
+      total -= Math.floor(member.monthlyCost * (1 - costReduction));
     }
   }
   const bonus = Math.floor(Math.max(0, total) * (servantBonus / 100));

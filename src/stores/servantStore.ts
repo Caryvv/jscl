@@ -2,13 +2,15 @@ import { create } from 'zustand';
 import { Servant } from '@/types/servant';
 import { SERVANTS } from '@/constants/servant';
 import { getStorage, setStorage } from '@/utils/storage';
+import { useResourceStore } from '@/stores/resourceStore';
 
 interface ServantState {
   servants: Servant[];
 
   init: () => void;
   upgradeServant: (type: string) => { success: boolean; message: string };
-  getTotalBonus: () => number;
+  /** 账房家丁提供的全家族银两月收益百分比加成 */
+  getAccountantBonus: () => number;
   save: () => void;
 }
 
@@ -33,13 +35,9 @@ export const useServantStore = create<ServantState>((set, get) => ({
     }
 
     const upgradeCost = servant.baseCost + servant.costGrowth * servant.level;
-    const resourceSaved = getStorage<any>('resourceState', null);
-    if (!resourceSaved || resourceSaved.silver < upgradeCost) {
+    if (!useResourceStore.getState().consumeSilver(upgradeCost)) {
       return { success: false, message: `银两不足，需要 ${upgradeCost} 银两` };
     }
-
-    resourceSaved.silver -= upgradeCost;
-    setStorage('resourceState', resourceSaved);
 
     servant.level += 1;
     servant.effectValue += servant.effectGrowth;
@@ -50,7 +48,10 @@ export const useServantStore = create<ServantState>((set, get) => ({
     return { success: true, message: `升级成功！${servant.name} 升至 ${servant.level} 级` };
   },
 
-  getTotalBonus: () => get().servants.reduce((sum, s) => sum + s.effectValue, 0),
+  getAccountantBonus: () => {
+    const accountant = get().servants.find(s => s.type === 'accountant');
+    return accountant ? accountant.effectValue : 0;
+  },
 
   save: () => setStorage('servantState', get().servants),
 }));

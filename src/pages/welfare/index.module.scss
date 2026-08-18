@@ -1,0 +1,210 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  background: $color-bg-page;
+  display: flex;
+  flex-direction: column;
+  padding: $spacing-lg;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-md;
+}
+
+.headerTitle {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.resBar {
+  display: flex;
+  flex-direction: row;
+  gap: $spacing-md;
+}
+
+.resText {
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  background: $color-bg-card;
+  border-radius: $radius-round;
+  padding: $spacing-xs $spacing-md;
+  box-shadow: $shadow-card;
+}
+
+.section {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-md;
+  box-shadow: $shadow-card;
+  margin-bottom: $spacing-md;
+}
+
+.sectionHead {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: $spacing-sm;
+}
+
+.sectionTitle {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.sectionSub {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-top: 2rpx;
+}
+
+// ===== 签到网格 =====
+.signGrid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: $spacing-xs;
+  margin-bottom: $spacing-md;
+}
+
+.signCell {
+  position: relative;
+  width: calc((100% - #{$spacing-xs} * 3) / 4);
+  background: $color-bg-card-dark;
+  border: 3rpx solid transparent;
+  border-radius: $radius-sm;
+  padding: $spacing-sm 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signCellToday {
+  border-color: $color-gold;
+}
+
+.signCellDone {
+  opacity: 0.5;
+}
+
+.signCellWeek {
+  background: rgba(230, 162, 60, 0.15);
+}
+
+.signDay {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  margin-bottom: 4rpx;
+}
+
+.signReward {
+  font-size: 20rpx;
+  color: $color-text-tertiary;
+}
+
+.signDoneMark {
+  position: absolute;
+  top: 4rpx;
+  right: 8rpx;
+  font-size: $font-size-sm;
+  color: $color-success;
+}
+
+// ===== 通用按钮 =====
+.actionBtn {
+  height: $button-height-md;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  border-radius: $radius-button;
+  @include flex-center;
+  &:active { opacity: 0.9; }
+}
+
+.actionBtnDisabled {
+  opacity: 0.5;
+}
+
+.actionBtnText {
+  font-size: $font-size-md;
+  color: $color-text-white;
+  font-weight: $font-weight-medium;
+}
+
+// ===== 金猪 =====
+.pigBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.pigInfoRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: $spacing-sm;
+}
+
+.pigInfoItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pigInfoLabel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-bottom: 4rpx;
+}
+
+.pigInfoValue {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-gold;
+}
+
+.pigTotalHint {
+  font-size: $font-size-xs;
+  color: $color-success;
+  text-align: center;
+  margin-bottom: $spacing-sm;
+}
+
+.pigBtnRow {
+  display: flex;
+  flex-direction: row;
+  gap: $spacing-md;
+}
+
+.pigBtn {
+  flex: 1;
+  height: $button-height-md;
+  border-radius: $radius-button;
+  @include flex-center;
+  &:active { opacity: 0.9; }
+}
+
+.depositBtn {
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+}
+
+.withdrawBtn {
+  background: linear-gradient(135deg, $color-gold 0%, $color-treasure 100%);
+}
+
+.backBtn {
+  margin-top: $spacing-xs;
+  height: $button-height-md;
+  background: $color-bg-card;
+  border-radius: $radius-button;
+  @include flex-center;
+  box-shadow: $shadow-card;
+  &:active { opacity: 0.9; }
+}
+
+.backBtnText {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+}

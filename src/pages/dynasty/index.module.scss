@@ -1,0 +1,195 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: $spacing-lg;
+}
+
+.dynastyCard {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-card;
+  margin-bottom: $spacing-md;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dynastyName {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.dynastyDesc {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  margin: 4rpx 0 $spacing-md;
+}
+
+.dynastyStats {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: $spacing-sm;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.statLabel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-bottom: 4rpx;
+}
+
+.statValue {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-gold;
+}
+
+.nextHint {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  margin-top: $spacing-xs;
+}
+
+.section {
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  box-shadow: $shadow-card;
+  margin-bottom: $spacing-md;
+}
+
+.sectionTitle {
+  display: block;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-sm;
+}
+
+.conditionRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: $spacing-xs 0;
+}
+
+.conditionDot {
+  font-size: $font-size-sm;
+  width: 40rpx;
+}
+
+.dotOk { color: $color-success; }
+.dotNo { color: $color-error; }
+
+.conditionText {
+  flex: 1;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.conditionProgress {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.emptyHint {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  text-align: center;
+  padding: $spacing-md 0;
+}
+
+.heirScroll {
+  white-space: nowrap;
+}
+
+.heirCard {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: 160rpx;
+  padding: $spacing-md $spacing-sm;
+  margin-right: $spacing-sm;
+  background: $color-bg-card-dark;
+  border: 3rpx solid transparent;
+  border-radius: $radius-md;
+  transition: all $transition-fast;
+}
+
+.heirCardActive {
+  border-color: $color-gold;
+}
+
+.heirName {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  margin-bottom: 4rpx;
+}
+
+.heirInfo {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.inheritBtn {
+  height: $button-height-lg;
+  background: linear-gradient(135deg, $color-gold 0%, $color-treasure 100%);
+  border-radius: $radius-button;
+  @include flex-center;
+  box-shadow: $shadow-card;
+  margin-bottom: $spacing-md;
+  &:active { opacity: 0.9; }
+}
+
+.inheritBtnDisabled {
+  opacity: 0.5;
+}
+
+.inheritBtnText {
+  font-size: $font-size-md;
+  color: $color-text-white;
+  font-weight: $font-weight-semibold;
+}
+
+.historyRow {
+  padding: $spacing-xs 0;
+  border-bottom: 2rpx solid $color-border;
+}
+
+.historyDynasty {
+  display: block;
+  font-size: $font-size-xs;
+  color: $color-gold;
+}
+
+.historyText {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.backBtn {
+  height: $button-height-md;
+  background: $color-bg-card;
+  border-radius: $radius-button;
+  @include flex-center;
+  box-shadow: $shadow-card;
+  &:active { opacity: 0.9; }
+}
+
+.backBtnText {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+}

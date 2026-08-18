@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text } from '@tarojs/components';
 import classnames from 'classnames';
 import { FamilyMember, APTITUDE_NAMES, LIFE_STAGE_NAMES, PROFESSION_NAMES } from '@/types/member';
+import { getMemberAvatar } from '@/utils/avatar';
 import styles from './index.module.scss';
 
 interface MemberCardProps {
@@ -26,7 +27,7 @@ const MemberCard: React.FC<MemberCardProps> = ({ member, onClick, compact }) => 
     >
       <View className={styles.avatar}>
         <Text className={styles.avatarEmoji}>
-          {isDeceased ? '\uD83E\uDEA6' : member.gender === 'male' ? '\uD83D\uDC68' : '\uD83D\uDC69'}
+          {getMemberAvatar(member)}
         </Text>
       </View>
       <Text className={classnames(styles.name, isDeceased && styles.nameDeceased)}>{member.name}</Text>

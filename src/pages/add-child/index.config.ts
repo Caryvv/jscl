@@ -1,4 +1,4 @@
 export default definePageConfig({
-  navigationBarTitleText: '添丁有喜',
+  navigationBarTitleText: '添丁福报',
   navigationBarBackgroundColor: '#F5F0E8',
 });

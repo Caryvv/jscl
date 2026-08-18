@@ -1,0 +1,76 @@
+@use '@/styles/variables.scss' as *;
+
+.card {
+  position: relative;
+  width: 210rpx;
+  background: $color-bg-card;
+  border: 3rpx solid $color-border;
+  border-radius: $radius-md;
+  padding: $spacing-md $spacing-sm;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: $shadow-card;
+  transition: all $transition-fast;
+  &:active { transform: scale(0.97); }
+}
+
+.cardLocked {
+  opacity: 0.6;
+}
+
+.cardEquipped {
+  box-shadow: 0 0 12rpx rgba(230, 162, 60, 0.6);
+}
+
+.equipBadge {
+  position: absolute;
+  top: -2rpx;
+  right: -2rpx;
+  background: $color-gold;
+  border-radius: 0 $radius-md 0 $radius-sm;
+  padding: 2rpx $spacing-xs;
+}
+
+.equipBadgeText {
+  font-size: 18rpx;
+  color: $color-text-white;
+}
+
+.iconWrap {
+  width: 96rpx;
+  height: 96rpx;
+  @include flex-center;
+  background: $color-bg-card-dark;
+  border-radius: $radius-round;
+  margin-bottom: $spacing-xs;
+}
+
+.icon {
+  font-size: 52rpx;
+}
+
+.rarity {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  margin-bottom: 2rpx;
+}
+
+.name {
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  font-weight: $font-weight-medium;
+  margin-bottom: 2rpx;
+}
+
+.level {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-bottom: 2rpx;
+}
+
+.bonus {
+  font-size: $font-size-xs;
+  color: $color-success;
+  text-align: center;
+}

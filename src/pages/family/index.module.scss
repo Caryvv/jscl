@@ -208,3 +208,91 @@
   font-weight: $font-weight-semibold;
   color: $color-text-white;
 }
+
+.foundOverlay {
+  min-height: 100vh;
+  background: $color-bg-page;
+  @include flex-center;
+  padding: $spacing-lg;
+}
+
+.foundModal {
+  width: 100%;
+  max-width: $max-content-width;
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: $shadow-card;
+}
+
+.foundEmoji { font-size: 88rpx; margin-bottom: $spacing-md; }
+.foundTitle { font-size: $font-size-xl; font-weight: $font-weight-bold; color: $color-text-primary; margin-bottom: $spacing-sm; }
+.foundDesc { font-size: $font-size-sm; color: $color-text-tertiary; text-align: center; margin-bottom: $spacing-lg; line-height: 1.6; }
+
+.foundInput {
+  width: 100%;
+  height: 88rpx;
+  background: $color-bg-hover;
+  border-radius: $radius-sm;
+  padding: 0 $spacing-md;
+  font-size: $font-size-lg;
+  text-align: center;
+  color: $color-text-primary;
+  box-sizing: border-box;
+  margin-bottom: $spacing-lg;
+}
+
+.foundBtn {
+  width: 100%;
+  height: $button-height-md;
+  background: linear-gradient(135deg, $color-treasure 0%, $color-warning 100%);
+  border-radius: $radius-button;
+  @include flex-center;
+  transition: all $transition-base;
+  &:active { opacity: 0.9; transform: scale(0.98); }
+}
+
+.foundBtnText { font-size: $font-size-lg; font-weight: $font-weight-semibold; color: $color-text-white; }
+
+.foundBtnRow {
+  width: 100%;
+  display: flex;
+  gap: $spacing-md;
+}
+
+.foundBtnGhost {
+  background: $color-bg-hover;
+  .foundBtnText { color: $color-text-secondary; }
+}
+
+.genderRow {
+  width: 100%;
+  display: flex;
+  gap: $spacing-md;
+  margin-bottom: $spacing-lg;
+}
+
+.genderCard {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $spacing-lg 0;
+  background: $color-bg-hover;
+  border-radius: $radius-md;
+  border: 2rpx solid transparent;
+  transition: all $transition-base;
+  &:active { transform: scale(0.98); }
+}
+
+.genderCardActive {
+  border-color: $color-treasure;
+  background: $color-bg-card;
+  box-shadow: $shadow-card;
+}
+
+.genderEmoji { font-size: 64rpx; margin-bottom: $spacing-sm; }
+.genderText { font-size: $font-size-lg; font-weight: $font-weight-semibold; color: $color-text-primary; }
